@@ -88,24 +88,32 @@
                         <p class="drop-text">or drag & drop a file</p>
                     </div>
                 </div>
+        </div>
+            <div class="after-upload">
             
-                <!-- Image Preview Section -->
-                <div class="preview-section">
-                    <h2><h2>
-                    <img id="previewImage" class="image-preview" style="display: none;" />
-                </div>
-            
-                <!-- Remove Background Button -->
-                <button id="removeBgButton" style="display: none;">Remove Background</button>
-            
-                <!-- Processed Image Section -->
-                <div class="processed-section">
-                    <h2></h2>
-                    <img id="processedImage" class="image-preview" style="display: none;" />
-                </div>
+            <!-- Image Preview Section -->
+            <div class="preview-section">
+               
+                <img id="previewImage" class="image-preview" style="display: none;" />
+           
+    
+            <!-- Remove Background Button -->
+            <button class="upload-button" id="removeBgButton" style="display: none;">Remove Background</button>
             </div>
+            <!-- Processed Image Section -->
+            <div class="processed-section">
+                
+                <img id="processedImage" class="image-preview" style="display: none;" />
             
-                <div class="try-these">
+    
+            <!-- Download Button (Added) -->
+            <button class="upload-button" id="downloadButton" style="display: none;">Download Processed Image</button>
+            </div>
+        </div>
+    </div>
+        
+            
+                <!-- <div class="try-these">
                     <p class="try-text">No image? <br>Try one of these:</p>
                     <div class="example-images">
                         <img src="https://www.gimp.org/tutorials/Changing_Background_Color_2/img1_initial.jpg"
@@ -114,14 +122,14 @@
                             alt="Example 2" class="example-img">
                         <img src="https://www.gimp.org/tutorials/Changing_Background_Color_2/img1_initial.jpg"
                             alt="Example 3" class="example-img">
-                    </div>
+                    </div> -->
                 </div>
                 <script src="script.js"></script>
-                <div class="terms">
+                <!-- <div class="terms">
                     <p>By uploading an image or URL you agree to our <a href="#" class="terms-link">Terms of
                             Service</a>. To learn more about how remove.bg handles your personal data, check our <a
                             href="#" class="terms-link">Privacy Policy</a>.</p>
-                </div>
+                </div> -->
             </div>
         </div>
         
