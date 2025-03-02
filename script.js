@@ -1,4 +1,3 @@
-// hell oworld
 document.addEventListener("DOMContentLoaded", function () {
     const imageInput = document.getElementById("imageInput");
     const removeBgButton = document.getElementById("removeBgButton");
