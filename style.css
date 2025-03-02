@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -145,6 +146,11 @@ body {
     margin-bottom:80px ;
 }
 
+.after-upload{
+    display: flex;
+    flex-direction: row;
+}
+
 
 
 .upload-container {
@@ -159,7 +165,7 @@ body {
     border: 2px  #d2ceceea;
     padding: 40px;
     border-radius: 25px;
-    margin-bottom: -50px;
+    margin-bottom: 0px;
     margin-top:80px ;
     margin-left: 40px;
     display: flex;
@@ -276,6 +282,8 @@ body {
     padding: 40px 20px;
     background-color: #fff;
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 .quality-title {
