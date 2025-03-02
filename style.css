@@ -207,7 +207,7 @@ body {
     display: none;
 }
 #removeBgButton {
-    background-color: red;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -215,10 +215,11 @@ body {
     font-size: 16px;
     margin-top: 20px;
     display: none;
+    border-radius: 8px;
 }
 
 #removeBgButton:hover {
-    background-color: darkred;
+    background-color: #0967cb;
 }
 
 .drop-text {
