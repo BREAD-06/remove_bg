@@ -3,8 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const removeBgButton = document.getElementById("removeBgButton");
     const previewImage = document.getElementById("previewImage");
     const processedImage = document.getElementById("processedImage");
+    const downloadButton = document.getElementById("downloadButton");
 
-    if (!imageInput || !removeBgButton || !previewImage) {
+    const TARGET_WIDTH = 264;
+    const TARGET_HEIGHT = 191;
+
+    if (!imageInput || !removeBgButton || !previewImage || !processedImage || !downloadButton) {
         console.error("❌ Error: Required elements not found in HTML!");
         return;
     }
@@ -16,15 +20,41 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Show preview
-        previewImage.src = URL.createObjectURL(file);
-        previewImage.style.display = "block";
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = new Image();
+            img.src = e.target.result;
 
-        // Show remove background button
-        removeBgButton.style.display = "block";
+            img.onload = function () {
+                // Create a canvas for resizing
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
 
-        // Store file for processing
-        window.uploadedFile = file;
+                canvas.width = TARGET_WIDTH;
+                canvas.height = TARGET_HEIGHT;
+
+                // Draw image on the canvas with the new dimensions
+                ctx.drawImage(img, 0, 0, TARGET_WIDTH, TARGET_HEIGHT);
+
+                // Convert canvas to data URL
+                previewImage.src = canvas.toDataURL("image/png");
+                previewImage.style.display = "block";
+
+                // Show remove background button
+                removeBgButton.style.display = "block";
+
+                // Hide processed image and download button (reset)
+                processedImage.style.display = "none";
+                downloadButton.style.display = "none";
+
+                // Convert the resized image back to a Blob for API processing
+                canvas.toBlob(function (blob) {
+                    window.uploadedFile = new File([blob], "resized-image.png", { type: "image/png" });
+                }, "image/png");
+            };
+        };
+
+        reader.readAsDataURL(file);
     });
 
     removeBgButton.addEventListener("click", async function () {
@@ -42,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch("https://api.remove.bg/v1.0/removebg", {
                 method: "POST",
                 headers: {
-                    "X-Api-Key": "JwPvQ4eLU3Dn4XrFX481PJ6u" 
+                    "X-Api-Key": "m1FJ5oSuQTRhUTpEJKiU4Vrp"
                 },
                 body: formData
             });
@@ -67,12 +97,22 @@ document.addEventListener("DOMContentLoaded", function () {
             processedImage.src = imageUrl;
             processedImage.style.display = "block";
 
-            // Force reload to ensure image updates
+            // Show download button
+            downloadButton.style.display = "block";
+            downloadButton.onclick = function () {
+                const link = document.createElement("a");
+                link.href = imageUrl;
+                link.download = "processed-image.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+
             processedImage.onload = function () {
-            console.log("✔️ Processed image loaded successfully!");
+                console.log("✔️ Processed image loaded successfully!");
             };
             processedImage.onerror = function () {
-             console.error("❌ Failed to load processed image!");
+                console.error("❌ Failed to load processed image!");
             };
 
         } catch (error) {
